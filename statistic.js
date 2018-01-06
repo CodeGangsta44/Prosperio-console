@@ -97,14 +97,14 @@ return user;
 }
 
 function statistic(){
-  let rl2 = readline.createInterface({
+  let rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
-  rl2.question('Please, enter your name: ', function(answer) {
+  rl.question('Please, enter your name: ', function(answer) {
     let login = answer;
     let user = main(login);
-    rl2.close();
+    rl.close()
     user.stat;
     let encrypted = cipher.update(data, 'utf8', 'hex');
     encrypted += cipher.final('hex');
@@ -113,13 +113,13 @@ function statistic(){
 }
 
 function session(min){
-  let rl2 = readline.createInterface({
+  let rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
-  rl2.question('Please, enter your name: ', function(answer) {
+  rl.question('Please, enter your name: ', function(answer) {
     let login = answer;
-    rl2.close();
+    rl.close()
     let user = main(login);
     user.session(min);
     let encrypted = cipher.update(data, 'utf8', 'hex');

@@ -8,7 +8,10 @@ function checkItem(item) {  // function for checking items
   const itemInt = parseInt(item); // parsing item into number type
   console.clear();
   if (itemInt === 1) return meditation.start();
-  if (itemInt === 2) sttc.stat();
+  if (itemInt === 2){
+    readline.rl.close();
+     sttc.stat();
+   }
   // for itemInt === 3
   return;
 }
