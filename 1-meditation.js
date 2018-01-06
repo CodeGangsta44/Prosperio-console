@@ -1,12 +1,12 @@
 'use strict';
 
+const sttc = require('./statistic.js');
 const console = require('console');
 const readline = require('./readline-input.js');
 
 const result = function(min) {
   console.clear();
-  console.log(`meditation minutes: ${min}`);
-  console.log('Streak: '); // need to add statistics for streak and keypress
+  sttc.ses(min);
 };
 
 class Timer {                         // simple countdown timer
