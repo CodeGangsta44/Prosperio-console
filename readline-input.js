@@ -20,11 +20,17 @@ const read = {
     rl.question(
       'Please enter the time what you want to maditate (MM:SS): '
       , fn);
+  },
+  readNameStat(fn) {
+    rl.question(
+      'Please, enter your name: '
+      , fn);
   }
 };
 
 module.exports = {
   rl: rl,
   readItem: read.readItem,
-  readTime: read.readTime
+  readTime: read.readTime,
+  readNameStat: read.readNameStat
 };

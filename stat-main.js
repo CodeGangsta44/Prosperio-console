@@ -77,7 +77,7 @@ class User {
     let i;
     for(i = 3; i < dates.length; i++){
       console.log(new Date((dates[i].split('-'))[0]).toString()
-      + ' Meditation time: ' + (dates[i].split('-'))[1] + 'min');
+      + ' Meditation time: ' + (dates[i].split('-'))[1] + ' min');
     }
   }
 }

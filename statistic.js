@@ -1,24 +1,34 @@
 'use strict';
 
+const readName = require('./readline-input.js');
 const readline = require('readline');
 const filesys = require('./fsw.js');
-const mainstat = require('./statmain.js');
+const mainstat = require('./stat-main.js');
 
-function statistic(){
-  let rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  rl.question('Please, enter your name: ', function(answer) {
-    let login = answer;
-    let user = mainstat.main(login);
-    rl.close()
-    user.stat;
-    filesys.write(user.data);
-  });
-}
+const statResult = (answer) => {
+  let login = answer;
+  let user = mainstat.main(login);
+  rl.close()
+  user.stat;
+  filesys.write(user.data);
+};
 
-function session(min){
+const statistic = () => (readName.readNameStat(statResult));
+// function statistic() {
+//   let rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+//   });
+//   rl.question('Please, enter your name: ', function(answer) {
+//     let login = answer;
+//     let user = mainstat.main(login);
+//     rl.close()
+//     user.stat;
+//     filesys.write(user.data);
+//   });
+// }
+
+function session(min) {
   let rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -36,4 +46,4 @@ function session(min){
 module.exports = {
   ses: session,
   stat: statistic
-}
+};
