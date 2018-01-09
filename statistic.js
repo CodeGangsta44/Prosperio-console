@@ -1,7 +1,7 @@
 'use strict';
 
 const readline = require('./readline-input.js');
-const mainstat = require('./statmain.js');
+const mainstat = require('./stat-main.js');
 
 function statistic(){
   readline.readName(mainstat.main.bind(null, 'stat', 0));
