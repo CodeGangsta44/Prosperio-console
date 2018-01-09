@@ -24,6 +24,7 @@ class Timer {                         // simple countdown timer
       if (minutes < 0) {
         clearInterval(i);
         clearTimeout(timeClear);
+        console.log(minutesResult);
         result(minutesResult);// call result function for log the result
       }
     }, 1000);
@@ -33,7 +34,6 @@ class Timer {                         // simple countdown timer
 const timer = new Timer();
 
 const parseTime = function(time) {   // get the time in string type
-  readline.rl.close(); // closing the readline stream from read.readTime
   const timeString = time.split(':'); // split the string by ':'
   const minutesString = timeString[0]; // get the minutes in string type
   const secondsString = timeString[1]; // get the seconds in string type

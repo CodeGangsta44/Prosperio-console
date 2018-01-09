@@ -20,11 +20,18 @@ const read = {
     rl.question(
       'Please enter the time what you want to maditate (MM:SS): '
       , fn);
+  },
+  readName(fn) { // function for reading the name of user
+    console.clear();
+    rl.question(
+      'Please, enter your name: ',
+      fn);
   }
 };
 
 module.exports = {
   rl: rl,
   readItem: read.readItem,
-  readTime: read.readTime
+  readTime: read.readTime,
+  readName: read.readName
 };

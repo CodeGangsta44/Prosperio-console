@@ -9,7 +9,6 @@ function checkItem(item) {  // function for checking items
   console.clear();
   if (itemInt === 1) return meditation.start();
   if (itemInt === 2){
-    readline.rl.close();
      sttc.stat();
    }
   // for itemInt === 3
