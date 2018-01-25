@@ -1,16 +1,14 @@
 'use strict';
 
-const sttc = require('./statistic.js');
+const sttc = require('./2-statistic.js');
 const console = require('console');
 const readline = require('./readline-input.js');
 
-const result = function(min) {
-  console.clear();
-  sttc.ses(min);
-};
+const result = (lg, min) => (sttc.ses(lg, min));
 
-class Timer {                         // simple countdown timer
-  start(minutes, seconds) {
+const Timer = class {                         // simple countdown timer
+  start(log, minutes, seconds) {
+    let lg = log;
     const minutesResult = minutes;
     const i = setInterval(() => {
       console.clear();
@@ -25,23 +23,21 @@ class Timer {                         // simple countdown timer
         clearInterval(i);
         clearTimeout(timeClear);
         console.log(minutesResult);
-        result(minutesResult);// call result function for log the result
+        result(lg, minutesResult); // call result function for log the result
       }
     }, 1000);
   }
-}
+};
 
 const timer = new Timer();
 
-const parseTime = function(time) {   // get the time in string type
+const parseTime = function(log, time) {   // get the time in string type
   const timeString = time.split(':'); // split the string by ':'
-  const minutesString = timeString[0]; // get the minutes in string type
-  const secondsString = timeString[1]; // get the seconds in string type
-  const minutes = parseInt(minutesString); // get the minutes in integer type
-  const seconds = parseInt(secondsString); // get the seconds in integer type
-  timer.start(minutes, seconds); // call the start method
+  const minutes = parseInt(timeString[0]); // get the minutes in integer type
+  const seconds = parseInt(timeString[1]); // get the seconds in integer type
+  timer.start(log, minutes, seconds); // call the start method
 };
 
-const start = () => (readline.readTime(parseTime));
+const start = (log) => (readline.readTime(log, parseTime));
 
 module.exports.start = start;
