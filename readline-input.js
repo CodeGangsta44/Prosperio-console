@@ -12,23 +12,7 @@ const rl = readline.createInterface({
 
 const read = {
   readItem(log, fn) { // function for reading menu items
-    main.name = log;
-    main.loop = () => {
-      const readline = require('./readline-input.js');
-      const meditation = require('./1-meditation.js');
-      const sttc = require('./2-statistic.js');
-      const sets = require('./3-settings.js');
-
-      function checkItem(item) {  // function for checking items
-        const itemInt = parseInt(item); // parsing item into number type
-        console.clear();
-        if (itemInt === 1) return meditation.start();
-        if (itemInt === 2) return sttc.stat();
-        if (itemInt === 3) return readline.readOpt(sets);
-        return;
-      }
-      readline.readItem(main.name, checkItem);
-    };
+    log ? main.name = log : 0;
     console.clear();
     rl.question(
       'Select an item:\n 1 - maditation\n 2 - statistics\n 3 - settings\n'
@@ -60,8 +44,8 @@ const read = {
       , fn);
   },
   back(){
-    rl.question('Press Enter', param => {
-      emitter.emit('loop', main.name);
+    rl.question('', param => {
+      emitter.emit('loop');
     })
   }
 };

@@ -8,17 +8,20 @@ const emitter = require('./EE.js');
 const login = {};
 
 function checkItem(item) {  // function for checking items
-  const itemInt = parseInt(item); // parsing item into number type
-  console.clear();
-  if (itemInt === 1) return meditation.start();
-  if (itemInt === 2) return sttc.stat();
-  if (itemInt === 3) return readline.readOpt(sets);
-  return;
+  if (item === '') emitter.emit('loop');
+  else{
+    const itemInt = parseInt(item); // parsing item into number type
+    console.clear();
+    if (itemInt === 1) return meditation.start();
+    if (itemInt === 2) return sttc.stat();
+    if (itemInt === 3) return readline.readOpt(sets);
+    return;
+  }
 }
 
 readline.readName(par => (readline.readItem(par, checkItem)));
-function loop(name){
-  readline.readItem(name, checkItem)
+function loop(){
+  readline.readItem(undefined, checkItem)
 }
 emitter.on('loop', loop);
 module.exports = login;

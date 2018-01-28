@@ -3,7 +3,6 @@
 const readline = require('./readline-input.js');
 const filesys = require('./fsw.js');
 const mn = require('./main.js')
-const data = filesys.readStat();
 
 class User {
 
@@ -50,11 +49,12 @@ function stat() {
   let i;
   for (i = 0; i < this.dates.length; i++) {
     console.log(new Date(this.dates[i]).toString() +
-    ' Meditation time: ' + (this.timePerDay[i]) + 'min');
+    ' Meditation time: ' + (this.timePerDay[i]) + ' min');
   }
 }
 
 function main(choice, min, login) {
+  const data = filesys.readStat();
   let currUser;
   if (data[login]) {
     currUser = data[login];
