@@ -2,31 +2,39 @@
 
 const readline = require('./readline-input.js');
 const filesys = require('./fsw.js');
-
-function main(log, opt){
-  console.log(log)
-  const settings = filesys.readSet(log);
-  const optNumber = parseInt(opt);
-  if(optNumber === 1){
-    readline.readLoud(log, changeVoiceLoud);
-  }
-  function changeVoiceLoud(log, loud){
+const options = {
+  changeVoiceLoud: function changeVoiceLoud(sets, loud){
     readline.rl.close();
     if(0<=loud<=100){
-      settings.voice = parseInt(loud);
-      filesys.writeSet(settings, log);
+      sets.voice = parseInt(loud);
+      filesys.writeSet(sets);
     }
-  }
+  },
 
-  function changeMusicLoud(loud){
+  changeMusicLoud: function changeMusicLoud(sets, loud){
+    readline.rl.close();
     if(0<=loud<=100){
-      settings.music = loud;
-      filesys.writeSet(settings, log);
+      sets.music = parseInt(loud);
+      filesys.writeSet(sets);
     }
-  }
-
-  function cleanStatistic(){
-    let data = filesys.readStat();
   }
 }
-main('Roman', 1);
+
+function main(opt){
+  const settings = filesys.readSet();
+  const optNumber = parseInt(opt);
+
+  if(optNumber === 1){
+    readline.readLoud(options.changeVoiceLoud.bind(null, settings));
+  }
+  if(optNumber === 2){
+    readline.readLoud(options.changeMusicLoud.bind(null, settings));
+  }
+  if(optNumber === 3){
+    console.clear();
+    readline.rl.close();
+    filesys.clean();
+  }
+}
+
+module.exports = main;

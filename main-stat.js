@@ -2,7 +2,7 @@
 
 const readline = require('./readline-input.js');
 const filesys = require('./fsw.js');
-
+const mn = require('./main.js')
 const data = filesys.readStat();
 
 class User {
@@ -54,24 +54,24 @@ function stat() {
   }
 }
 
-function main(choice, min, log) {
-  readline.rl.close();
+function main(choice, min, login) {
   let currUser;
-  if (data[log]) {
-    currUser = data[log];
+  if (data[login]) {
+    currUser = data[login];
   } else {
-    currUser = new User(log);
+    currUser = new User(login);
   }
   if (choice === 'stat') {
     stat.call(currUser);
   }
   if (choice === 'ses') {
     session.call(currUser, min);
-    data[log] = currUser;
+    data[login] = currUser;
     filesys.writeStat(data);
   }
 }
-module.exports.main = {
+
+module.exports = {
   main,
   User
 }

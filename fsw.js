@@ -1,12 +1,24 @@
 'use strict';
 
 const crypto = require('crypto');
-const decipher = crypto.createDecipher('aes192', 'it is not a password');
 const cipher = crypto.createCipher('aes192', 'it is not a password');
 const fs = require('fs');
-//const User = require('./main-stat.js').User;
+const login = require('./main.js');
+
+class User {
+
+  constructor(name) {
+    this.name = name;
+    this.maxStreak = 0;
+    this.currentStreak = 0;
+    this.total = 0;
+    this.dates = [];
+    this.timePerDay = [];
+  }
+}
 
 function readStatistic() {
+  const decipher = crypto.createDecipher('aes192', 'it is not a password');
   let base;
   let crypted;
   try {
@@ -28,7 +40,7 @@ function writeStatistic(data) {
   fs.writeFileSync('database', encrypted);
 }
 
-function readSettings(log){
+function readSettings(){
   let data;
   try{
     data = fs.readFileSync('settings.json').toString();
@@ -36,16 +48,16 @@ function readSettings(log){
   } catch (e) {
     data = {};
   }
-  if(!data[log]){
-    data[log] = {
+  if(!data[login.name]){
+    data[login.name] = {
       voice: 100,
       music: 100
     };
   }
-  return data[log];
+  return data[login.name];
 }
 
-function writeSettings(sets, log){
+function writeSettings(sets){
   let data;
   try{
     data = fs.readFileSync('settings.json').toString();
@@ -53,14 +65,14 @@ function writeSettings(sets, log){
   } catch (e) {
     data = {};
   }
-  data[log] = sets;
+  data[login.name] = sets;
   data = JSON.stringify(data);
   fs.writeFileSync('settings.json', data);
 }
 
-function cleanStatistic(log){
+function cleanStatistic(){
   let data = readStatistic();
-  data[log] = new User(log);
+  data[login.name] = new User(login.name);
   writeStatistic(data);
 }
 module.exports = {
